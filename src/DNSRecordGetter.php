@@ -6,9 +6,6 @@
 
 namespace Mika56\SPFCheck;
 
-
-use function array_merge;
-use Exception;
 use Mika56\SPFCheck\Exception\DNSLookupException;
 use Mika56\SPFCheck\Exception\DNSLookupLimitReachedException;
 use PurplePixie\PhpDns\DNSQuery;
@@ -192,7 +189,7 @@ class DNSRecordGetter implements DNSRecordGetterInterface
 
 		    switch($type) {
 			    default:
-			    	throw new Exception("Unsupported type " . $type . ".");
+			    	throw new \Exception("Unsupported type " . $type . ".");
 			    	break;
 			    case "A":
 				    $response[] = array(
