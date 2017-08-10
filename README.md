@@ -14,20 +14,20 @@ Run `composer require mika56/spfcheck` or add this to your composer.json:
 ```json
 {
   "require": {
-    "mika56/spfcheck": "dev-master"
+    "mika56/spfcheck": "1.0.0"
   }
 }
 ```
 
 ## Usage
-Create a new instance of SPFCheck. The constructor requires a DNSRecordGetterInterface to be passed. Currently, only DNSRecordGetter exists, which uses PHP's DNS functions to get data.
+Create a new instance of SPFCheck. The constructor requires a DNSRecordGetterInterface to be passed. Currently, only DNSRecordGetter exists, which uses the [PHP DNS Direct Query Module](https://github.com/purplepixie/phpdns) to get data.
 ```php
 <?php
 use Mika56\SPFCheck\SPFCheck;
 use Mika56\SPFCheck\DNSRecordGetter;
 
 require('vendor/autoload.php');
-$checker = new SPFCheck(new DNSRecordGetter());
+$checker = new SPFCheck(new DNSRecordGetter("8.8.8.8")); // 8.8.8.8 is the nameserver you wish to use for the dns queries.
 var_dump($checker->isIPAllowed('127.0.0.1', 'test.com'));
 ```
 
