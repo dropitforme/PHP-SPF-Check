@@ -23,24 +23,6 @@ class DNSRecordGetterDirectTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($result);
     }
 
-    public function testResolveA()
-    {
-
-        $dnsRecordGetter = new DNSRecordGetterDirect();
-
-        $result = $dnsRecordGetter->resolveA('google.com', true);
-        $this->assertContains('74.125.196.139', $result);
-        $this->assertNotContains('::12', $result);
-
-        /*
-         * Google responds with different ip6 data, so really not a good test case.
-         *
-        $result = $dnsRecordGetter->resolveA('google.com', false);
-        $this->assertContains('74.125.196.139', $result);
-        $this->assertContains('2607:f8b0:4002:c07::8a', $result);
-        */
-    }
-
     public function testResolveMx()
     {
 
