@@ -1,4 +1,9 @@
+sudo: required
+
 language: php
+
+services:
+  - docker
 
 php:
   - 5.4
@@ -16,6 +21,7 @@ matrix:
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
+  - docker run -d --rm --name pdns -p 53:53/udp -p 53:53/tcp -p 80:80 -e "WEBPASSWD=password" raspberrypython/powerdns-sqlite3:latest
 
 script:
   - mkdir -p build/logs

@@ -40,11 +40,11 @@ class DNSRecordGetterDirect implements DNSRecordGetterInterface
      * DNSRecordGetter constructor.
      *
      * @param string $nameserver
-     * @param string $port
-     * @param string $timeout
+     * @param int $port
+     * @param int $timeout
      * @param bool $udp
      */
-    public function __construct($nameserver = "8.8.8.8", $port = "53", $timeout = "30", $udp = true)
+    public function __construct($nameserver = "8.8.8.8", $port = 53, $timeout = 30, $udp = true)
     {
         $this->nameserver = $nameserver;
         $this->port       = $port;
@@ -174,7 +174,7 @@ class DNSRecordGetterDirect implements DNSRecordGetterInterface
         $result = $dnsquery->query($question, $type);
 
         if ($dnsquery->hasError()) {
-            throw new DNSLookupException;
+            throw new DNSLookupException($dnsquery->getLasterror());
         }
 
         foreach ($result as $index => $record) {
